@@ -22,25 +22,26 @@ export default function Home() {
     }, '/first-post')
   }
   // 钩子事件
-  const events = [
-    'routeChangeStart',
-    'routeChangeComplete',
-    'routeChangeError',
-    'beforeHistoryChange',
-    'hashChangeStart',
-    'hashChangeComplete'
-  ]
-  function emitEvent(type) {
-    return (...args) => (
-      console.log(type, ...args)
-    )
-  };
+ const events = [
+   'routeChangeStart',
+   'routeChangeComplete',
+   'routeChangeError',
+   'beforeHistoryStart',
+   'hashChangeStart',
+   'hashChangeComplete'
+ ]
+ function emitEvent(type) {
+   return (...args) => (
+     console.log(type, ...args)
+   )
+ };
 
-  useEffect(() => {
-    events.forEach(event => {
-      Router.events.on(event, emitEvent(event));
-    })
-  })
+ useEffect(() => {
+   events.map(event => (
+     Router.events.on(event, emitEvent(event))
+   ))
+ })
+
 
   return (
     <>

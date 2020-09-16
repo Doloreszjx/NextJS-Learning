@@ -75,5 +75,20 @@ function goFirstPost() {
 - hashChangeStart：启用hash路由时，在开始跳转时触发
 - hashChangeComplete：启用hash路由时，在跳转成功后触发。
 
+### 二、 获取数据的方法
+#### 2. getInitialProps
+##### 2.1 定义
+`getInitialProps`确定了一个规范，一个页面组件只要把访问API外部资源的代码放在getInitialProps中就可以了，其他的都不用管。Next.js 自然会在服务器端或者浏览器端调用 getInitialProps 来获取外部资源，并把外部资源以 props 的方式传递给页面组件。</br>
+##### 2.2  getInitialProps 是页面组件的静态成员函数，可以用下面的方法定义
+- `Poster.getInitialProps = async() => {}`;
+- 也可以在类组件加上static关键字定义：
+```
+Class Index extends React.Component {
+  static async gteInitialProps() {
+    ...
+  }
+}
+```
+`getInitialProps`是一个async函数，因此在`getInitialProps`函数中可以使用await关键字，用同步的方式编写异步逻辑。
 
 
