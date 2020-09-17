@@ -91,4 +91,23 @@ Class Index extends React.Component {
 ```
 `getInitialProps`是一个async函数，因此在`getInitialProps`函数中可以使用await关键字，用同步的方式编写异步逻辑。
 
+## 三、 懒加载
+在next中，pages下的所有页面都被切成了不同的模块，当我们访问某个页面的时候才会去加载这个js文件。当项目过大时，模块的加载需要管理，否则可能会导致首次加载过慢。这时候我们可以使用next.js提供的`lazeLoading`来解决，让组件或者模块只有在需要用的时候才加载;一般分为两种情况，一种是**懒加载模块**，一种是**异步加载组件**。
+#### 3.1 懒加载模块
+比如我们经常会用到的**Moment.js**，是JavaScript日期处理类库；
+```
+const handleStandarDate = async() => {
+    const moment = await import('moment');
+    setNowTime(moment.default(Date.now()).format());
+  }
+```
+#### 3.2 懒加载组件
+在我们需要使用到该组件的时候再去渲染；
+```
+import dynamic from 'next/dynamic';
+
+const LoadPicture = dynamic(import('../components/LoadPicture'));
+```
+
+
 
