@@ -2,7 +2,6 @@ import Router from 'next/router';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-
 export default function Home() {
   const PageRouterList = [{
     id: '01',
