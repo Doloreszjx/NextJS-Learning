@@ -1,6 +1,11 @@
 import Router from 'next/router';
 import Link from 'next/link';
+// import Button from '../components/Button';
+import Header from '../components/Header';
 import { useEffect } from 'react';
+
+import { Button } from 'antd';
+import '../styles/test.css';
 
 export default function Home() {
   const PageRouterList = [{
@@ -44,12 +49,14 @@ export default function Home() {
 
   return (
     <>
+      <Header title={'home'} />
       <h1>Home</h1>
       <div>
         { PageRouterList.map(item => (
           <Link href={`/poster?name=${item.name}`}  as={`${item.name}`} key={item.id}><a>{item.title}</a></Link>
         ))}
-        <button onClick={handleRouter}>Page One</button>
+        {/* <Button onClick={handleRouter} className="home-button" children={'Page One'} /> */}
+        <div><Button>我是按钮</Button></div>
       </div>
     </>
   )

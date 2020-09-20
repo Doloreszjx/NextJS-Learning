@@ -109,5 +109,62 @@ import dynamic from 'next/dynamic';
 const LoadPicture = dynamic(import('../components/LoadPicture'));
 ```
 
+## 四、 SEO优化
+#### 4.1 在各个页面加上<head>
+```
+import Head from 'next/head'
+function Head() {
+  return (
+    <>
+      <Head>
+        <title>主页</title>
+        <meta charset='utf-8' />
+      </Head>
+    </>
+  )
+}
+```
+#### 4.2 定义全局<Head>
+在components中创建Head组件;
+
+## 五、添加样式
+由于Next.js是默认是不支持CSS样式引入的，要进行一些必要的设置，才可以完成。
+#### 5.1 引入antd样式库
+1. 我们需要先安装`@zeit/next-css`包，他的主要功能是让Next.js可以加载css文件；
+2. 我们需要自己创建一个`next.config.js`文件，并且进行相关配置
+- 引入css文件：
+```
+const withCss = require('@zeit/next-css');
+
+if(typeof require !== 'undefined') {
+  require.extensions['.css'] = file => {}
+}
+
+module.exports = withCss({});
+```
+- 同时引入css\scss文件
+**以下方法我们会发现我们无法同时引入`next-css`和`next-sass`插件；
+```
+// sass
+const withSass = require('@zeit/next-sass');
+module.exports = withSass({});
+// css
+const withCss = require('@zeit/next-css');
+module.exports = withCss({});
+```
+**这时我们需要引入官方提供的：`next-compose-plugins`:
+```
+const withCss = require('@zeit/next-css');
+const withSass = require('@zeit/next-sass');
+const withPlugins = require('next-compose-plugins');
+
+module.exports = withPlugins([withSass, withCss], {
+  webpack: (config) => {
+    return config
+  },
+})
+```
+
+
 
 
